@@ -1,5 +1,4 @@
-# DataUtil
+DataUtil
+========
 
-Data structure utilities
-
-
+Javascript data structure utilities.
