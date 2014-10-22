@@ -1,0 +1,43 @@
+{
+  "name": "DataUtil",
+  "description": "Data structure utilities",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wewei/DataUtil",
+  "author": {
+    "name": "Wei Wei",
+    "email": "shazhouke@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wewei/DataUtil.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wewei/DataUtil/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/wewei/DataUtil/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "app/main.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "connect": "~2.12.0",
+    "almond": "~0.2.7",
+    "grunt": "~0.4.5"
+  },
+  "keywords": [],
+  "local_port": "8000"
+}
