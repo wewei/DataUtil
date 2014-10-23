@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 			banner: '<%= banner %>'
 		  },
 		  dist: {
-			src: '<%= concat.dist.dest %>',
+			src: '<%= requirejs.compile.options.out %>',
 			dest: 'dist/<%= pkg.name %>.min.js'
 		  },
 		},
@@ -73,9 +73,13 @@ module.exports = function(grunt) {
 					almond: true,
 					wrap: true,
 					/*insertRequire: ['main'], // Needed if you don't have a require(['main']) in your file*/
-					baseUrl: libFolder + '/',
-					include: ['main', '../node_modules/almond/almond.js'],
-					out: 'dist/main-build.js',
+					baseUrl: 'dist/coffee',
+                    paths: {
+                        main : '../../app/main',
+                        almond : '../../node_modules/almond/almond',
+                    },
+					include: ['main', 'almond'],
+                    out: 'dist/<%= pkg.name %>.js',
 					done: function(done, output) {
 						var duplicates = require('rjs-build-analysis').duplicates(output);
 						if (duplicates.length > 0) {
@@ -88,6 +92,19 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+        clean: {
+            build: ['dist']
+        },
+        coffee: {
+            glob_to_multiple: {
+                expand : true,
+                flatten : true,
+                cwd : 'app',
+                src : ['*.coffee'],
+                dest : 'dist/coffee/',
+                ext : '.js'
+            }
+        }
 	});
 
 	// These plugins provide necessary tasks.
@@ -97,9 +114,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-coffee');
 
 	// Default build task.
-	grunt.registerTask('default', ['requirejs', 'uglify']);
+	grunt.registerTask('default', ['coffee', 'requirejs', 'uglify']);
 	
 	// Development web server
 	var http = require('http'),
@@ -114,7 +133,8 @@ module.exports = function(grunt) {
 		app = connect()
 			.use(connect.static(libFolder))
 			// Allows /js/lib/require.js to point to the one installed via npm install
-			.use('/js/lib/', connect.static('node_modules/grunt-contrib-requirejs/node_modules/requirejs/'));
+			.use('/js/lib/', connect.static('node_modules/grunt-contrib-requirejs/node_modules/requirejs/'))
+            .use('/dist/coffee/', connect.static('dist/coffee/'));
 			
 		server = http.createServer(app);
 		grunt.log.writeln('Starting static web server on port ' + port);

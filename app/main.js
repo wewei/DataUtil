@@ -6,8 +6,7 @@
  * Licensed under the MIT license.
  */
 
-define('main', function() {
-	// Your code goes here!
+define(['hello'], function(hello) {
+    hello();
 });
 
-require('main');

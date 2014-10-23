@@ -20,7 +20,7 @@
       "url": "https://github.com/wewei/DataUtil/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "app/main.js",
+  "main": "app/main",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -36,7 +36,10 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "connect": "~2.12.0",
     "almond": "~0.2.7",
-    "grunt": "~0.4.5"
+    "grunt": "~0.4.5",
+    "grunt-contrib-coffee": "~0.12.0",
+    "install": "~0.1.7",
+    "grunt-contrib-clean": "~0.6.0"
   },
   "keywords": [],
   "local_port": "8000"
