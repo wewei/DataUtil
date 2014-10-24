@@ -127,8 +127,9 @@ module.exports = function(grunt) {
 		server,
 		port = pkg.local_port;
 	
-	grunt.registerTask('dev', 'Starts a development server', function() {
+	grunt.registerTask('run-server', 'Starts a development server', function() {
 		var done = this.async();
+        grunt.task.requires('default');
 		
 		app = connect()
 			.use(connect.static(libFolder))
@@ -167,4 +168,6 @@ module.exports = function(grunt) {
 		// Ensures that done is used and doesn't generate a jshint error
 		if (true === false) { done(); }
 	});
+
+    grunt.registerTask('dev', ['default', 'run-server']);
 };
